@@ -2,7 +2,7 @@
   gather_facts: False
 
   tasks:
-  - debug: var=inventory_hostname
+  - debug: var=ansible_version
 
   # groups information
   - debug: msg='group vars all/servers/workstations
@@ -10,12 +10,25 @@
                   / {{ group_vars_servers | default("Not set")}}
                   / {{ group_vars_workstations | default("Not set")}}'
 
+  - debug: msg='group vars from hostvars[srv-a] all/servers/workstations
+                - {{ hostvars['srv-a'].group_vars_all | default("Not set")}}
+                  / {{ hostvars['srv-a'].group_vars_servers | default("Not set")}}
+                  / {{ hostvars['srv-a'].group_vars_workstations | default("Not set")}}'
+
   - debug: msg='group vars from hostvars[ws-a] all/servers/workstations
                 - {{ hostvars['ws-a'].group_vars_all | default("Not set")}}
                   / {{ hostvars['ws-a'].group_vars_servers | default("Not set")}}
                   / {{ hostvars['ws-a'].group_vars_workstations | default("Not set")}}'
 
-  - debug: msg='group vars from hostvars[srv-a] all/servers/workstations
-                - {{ hostvars['srv-a'].group_vars_all | default("Not set")}}
-                  / {{ hostvars['srv-a'].group_vars_servers | default("Not set")}}
-                  / {{ hostvars['srv-a'].group_vars_workstations | default("Not set")}}'
+  # hosts info
+  - debug: msg='host vars srv-a/ws-a
+                - {{ host_vars_srv_a | default("Not set")}}
+                  / {{ host_vars_ws_a | default("Not set")}}'
+
+  - debug: msg='host vars from hostvars[srv-a] srv-a/ws-a
+                - {{ hostvars['srv-a'].host_vars_srv_a | default("Not set")}}
+                  / {{ hostvars['srv-a'].host_vars_ws_a | default("Not set")}}'
+
+  - debug: msg='host vars from hostvars[ws-a] srv-a/ws-a
+                - {{ hostvars['ws-a'].host_vars_srv_a | default("Not set")}}
+                  / {{ hostvars['ws-a'].host_vars_ws_a | default("Not set")}}'
