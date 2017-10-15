@@ -32,3 +32,8 @@
   - debug: msg='host vars from hostvars[ws-a] srv-a/ws-a
                 - {{ hostvars['ws-a'].host_vars_srv_a | default("Not set")}}
                   / {{ hostvars['ws-a'].host_vars_ws_a | default("Not set")}}'
+
+  - name: saving stuff as txt file
+    template:
+      src: test.txt.j2
+      dest: /tmp/test.txt

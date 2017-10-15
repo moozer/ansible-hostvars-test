@@ -1,0 +1,28 @@
+This host is {{inventory_hostname}}
+
+group vars
+- all           {{ group_vars_all | default("Not set")}}
+- servers       {{ group_vars_servers | default("Not set")}}
+- workstations  {{ group_vars_workstations | default("Not set")}}
+
+group vars from hostvars[srv-a]
+- all           {{ hostvars['srv-a'].group_vars_all | default("Not set")}}
+- servers       {{ hostvars['srv-a'].group_vars_servers | default("Not set")}}
+- workstations  {{ hostvars['srv-a'].group_vars_workstations | default("Not set")}}
+
+group vars from hostvars[ws-a]
+- all           {{ hostvars['ws-a'].group_vars_all | default("Not set")}}
+- servers       {{ hostvars['ws-a'].group_vars_servers | default("Not set")}}
+- workstations  {{ hostvars['ws-a'].group_vars_workstations | default("Not set")}}
+
+host vars
+- srv-a {{ host_vars_srv_a | default("Not set")}}
+- ws-a  {{ host_vars_ws_a | default("Not set")}}
+
+host vars from hostvars[srv-a]
+- srv-a {{ hostvars['srv-a'].host_vars_srv_a | default("Not set")}}
+- ws-a  {{ hostvars['srv-a'].host_vars_ws_a | default("Not set")}}
+
+host vars from hostvars[ws-a]
+- srv-a {{ hostvars['ws-a'].host_vars_srv_a | default("Not set")}}
+- ws-a  {{ hostvars['ws-a'].host_vars_ws_a | default("Not set")}}
