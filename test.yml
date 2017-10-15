@@ -1,4 +1,21 @@
 - hosts: all
+  gather_facts: False
 
   tasks:
   - debug: var=inventory_hostname
+
+  # groups information
+  - debug: msg='group vars all/servers/workstations
+                - {{ group_vars_all | default("Not set")}}
+                  / {{ group_vars_servers | default("Not set")}}
+                  / {{ group_vars_workstations | default("Not set")}}'
+
+  - debug: msg='group vars from hostvars[ws-a] all/servers/workstations
+                - {{ hostvars['ws-a'].group_vars_all | default("Not set")}}
+                  / {{ hostvars['ws-a'].group_vars_servers | default("Not set")}}
+                  / {{ hostvars['ws-a'].group_vars_workstations | default("Not set")}}'
+
+  - debug: msg='group vars from hostvars[srv-a] all/servers/workstations
+                - {{ hostvars['srv-a'].group_vars_all | default("Not set")}}
+                  / {{ hostvars['srv-a'].group_vars_servers | default("Not set")}}
+                  / {{ hostvars['srv-a'].group_vars_workstations | default("Not set")}}'
