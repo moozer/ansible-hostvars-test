@@ -37,3 +37,9 @@
     template:
       src: test.txt.j2
       dest: /tmp/test.txt
+
+  - name: saving stuff as txt file (locally)
+    connection: local
+    template:
+      src: test.txt.j2
+      dest: "./test-{{inventory_hostname}}.txt"
